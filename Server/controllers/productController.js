@@ -24,3 +24,22 @@ export const addProduct=async(req,res)=>{
         res.status(500).json({message:err.message});
     }   
  }
+
+ //update product
+    export const updateProduct=async(req,res)=>{
+        const {id}=req.params;
+        const {name,price,quantity}=req.body;
+        try{
+            const updatedProduct=await Product.findByIdAndUpdate(id,{
+                name,
+                price,
+                quantity
+            },{new:true}); 
+            res.status(200).json(updatedProduct);
+        }catch(err){
+            res.status(500).json({message:err.message});
+        }
+    }
+
+
+//delete product
